@@ -4,8 +4,4 @@ version = "0.1.0"
 authors = ["radogost"]
 edition = "2018"
 
-[[bin]]
-name = "s1c1"
-path = "./src/bin/s1c1.rs"
-
 [dependencies]

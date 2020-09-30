@@ -11,3 +11,7 @@ pub fn hex_string_to_bytes(s: &str) -> Vec<u8> {
 pub fn bytes_to_hex_string(bytes: &[u8]) -> String {
     bytes.into_iter().map(|b| format!("{:x}", b)).collect()
 }
+
+pub fn xor_bytes(b1: &[u8], b2: &[u8]) -> Vec<u8> {
+    b1.into_iter().zip(b2).map(|(a, b)| a ^ b).collect()
+}
