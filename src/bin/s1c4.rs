@@ -22,6 +22,7 @@ fn find_message_in_file(file: &str) -> Result<String> {
 
     Ok(String::from_utf8(decrypted_bytes).unwrap())
 }
+
 fn main() -> Result<()> {
     let file = "./data/s1c4.txt";
     let decrypted = find_message_in_file(file)?;
