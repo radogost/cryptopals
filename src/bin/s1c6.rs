@@ -3,6 +3,8 @@ use cryptopals::*;
 use std::fs::File;
 use std::io::{BufReader, Read};
 
+use openssl::base64;
+
 fn hamming_distance(s1: &[u8], s2: &[u8]) -> u32 {
     s1.iter()
         .zip(s2)
@@ -60,7 +62,8 @@ fn main() -> std::io::Result<()> {
     let mut buf_reader = BufReader::new(file);
     let mut content = String::new();
     buf_reader.read_to_string(&mut content)?;
-    let decoded_content = decode_base64(&content);
+    let content = content.replace("\n", "");
+    let decoded_content = base64::decode_block(&content).unwrap();
 
     let keysize_candidates = get_keysize_candidates(&decoded_content, 10);
 

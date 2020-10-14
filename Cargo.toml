@@ -5,3 +5,5 @@ authors = ["radogost"]
 edition = "2018"
 
 [dependencies]
+openssl = "0.10"
+openssl-sys = "0.9"
