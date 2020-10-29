@@ -1,6 +1,6 @@
 use crate::xor_bytes;
 
-use openssl::symm::{Cipher, Crypter, Mode};
+use openssl::symm::{decrypt, encrypt, Cipher, Crypter, Mode};
 
 pub fn aes_128_cbc_encrypt(bytes: &[u8], key: &[u8], iv: &[u8]) -> Vec<u8> {
     let cipher = Cipher::aes_128_ecb();
@@ -39,6 +39,16 @@ pub fn aes_128_cbc_decrypt(bytes: &[u8], key: &[u8], iv: &[u8]) -> Vec<u8> {
     });
 
     decrypted
+}
+
+pub fn aes_128_ecb_encrypt(bytes: &[u8], key: &[u8]) -> Vec<u8> {
+    let cipher = Cipher::aes_128_ecb();
+    encrypt(cipher, key, None, bytes).unwrap()
+}
+
+pub fn aes_128_ecb_decrypt(bytes: &[u8], key: &[u8]) -> Vec<u8> {
+    let cipher = Cipher::aes_128_ecb();
+    decrypt(cipher, key, None, bytes).unwrap()
 }
 
 #[cfg(test)]
