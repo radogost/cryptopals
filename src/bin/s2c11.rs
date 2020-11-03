@@ -1,4 +1,4 @@
-use cryptopals::aes::{aes_128_cbc_encrypt, aes_128_ecb_encrypt};
+use cryptopals::aes::{aes_128_cbc_encrypt, aes_128_ecb_encrypt, detect_encryption_mode};
 
 use rand::{rngs::ThreadRng, thread_rng, Rng};
 
@@ -31,22 +31,12 @@ fn encryption_oracle(data: &[u8]) -> Vec<u8> {
     }
 }
 
-fn detect_encryption(bytes: &[u8]) -> &'static str {
-    let blocks: Vec<&[u8]> = bytes.chunks(16).skip(1).take(2).collect();
-
-    if blocks[0] == blocks[1] {
-        "ECB"
-    } else {
-        "CBC"
-    }
-}
-
 fn main() {
     let data = [42; 64];
 
     for _ in 0..10 {
         let encrypted_data = encryption_oracle(&data);
-        let mode = detect_encryption(&encrypted_data);
+        let mode = detect_encryption_mode(&encrypted_data);
         println!("Data was AES encrypted in {} mode", mode);
     }
 }

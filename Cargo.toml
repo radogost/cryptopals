@@ -5,6 +5,7 @@ authors = ["radogost"]
 edition = "2018"
 
 [dependencies]
+lazy_static = "1.4"
 rand = "0.7"
 openssl = "0.10"
 openssl-sys = "0.9"

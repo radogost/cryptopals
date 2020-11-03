@@ -2,6 +2,16 @@ use crate::xor_bytes;
 
 use openssl::symm::{decrypt, encrypt, Cipher, Crypter, Mode};
 
+pub fn detect_encryption_mode(bytes: &[u8]) -> &'static str {
+    let blocks: Vec<&[u8]> = bytes.chunks(16).skip(1).take(2).collect();
+
+    if blocks[0] == blocks[1] {
+        "ECB"
+    } else {
+        "CBC"
+    }
+}
+
 pub fn aes_128_cbc_encrypt(bytes: &[u8], key: &[u8], iv: &[u8]) -> Vec<u8> {
     let cipher = Cipher::aes_128_ecb();
 
